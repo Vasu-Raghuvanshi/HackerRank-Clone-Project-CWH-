@@ -1,0 +1,271 @@
+<!--Exercise Hacking Terminal:)77-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hacking Terminal</title>
+  <style>
+    body{
+      background-color:green;
+      /*position:relative;*/
+    }
+    .window{
+      border:3px solid black;
+      background-color:black;  
+      opacity:0.8;
+      position:absolute;
+      top:0px;
+      left:0px;
+      bottom:40vh;
+      width:100vw;
+      height:60vh;
+      overflow:scroll;
+      padding:4px;
+    }
+
+    .shadow{
+
+      /*background-color:yellow;
+      opacity:0.2;*/
+      position:absolute;
+      top:60vh;
+      left:0px;
+      /*bottom:0px;*/
+      width:100vw;
+      height:41vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+    #cmd{
+      background-color:black;
+      border-radius:6px;
+
+      height:50px;
+      position:absolute;
+      bottom:25vh;
+    }
+    #cmd::placeholder{
+
+      color:red;
+      font-weight:bold;
+    }
+    @keyframes blink {
+      0% { opacity: 0.7; }
+      50% { opacity: 0.3; }
+      100% { opacity: 0.7; }
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes dotblink1{
+      0%{opacity:0;}
+      40%{opacity:1;}
+      90%{opacity:1;}
+      100%{opacity:0;}
+
+    }
+    .dot{
+      animation: dotblink1 1s 10;
+    }
+
+    .hacked{
+      height:100vh;
+      background-color:black;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:Red;
+      font-size:29px;
+    }
+
+    #hacked{
+      animation:dotblink1 1s 10;
+    }
+
+
+
+
+
+  </style>
+
+</head>
+<body>
+
+  <div class="window">
+
+  </div>
+  <div class="shadow">
+    <input type="text" id="cmd" name="cmd" placeholder="" >
+  </div>
+
+
+
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+
+    //Placeholder cmd
+      //document.getElementById("cmd").placeholder="/cmd:initialise"
+
+
+      //by gpt
+      const input = document.getElementById("cmd");
+      const placeholderText = "/cmd:initialise";
+
+      let index = 0;
+
+      const typePlaceholder = () => {
+        if (index < placeholderText.length) {
+          input.placeholder += placeholderText[index];
+          index++;
+          setTimeout(typePlaceholder, 75); // Adjust the delay here (in milliseconds)
+
+        }
+        else{
+        document.getElementsByClassName("window")[0].classList.add("blink");
+
+        }
+      };
+
+      //Printing Lines
+
+
+      const object = {
+        0: "<div>Initialising<span class='dot'>...</span></div>",
+        1: "<div>Hacking System<span class='dot'>...</span></div>",
+        2: "<div>Getting Files<span class='dot'>...</span></div>",
+        3: "<div>Reading Passwords<span class='dot'>...</span></div>",
+        4: "<div>Hacking Accounts<span class='dot'>...</span></div>",
+        5: "<div>Gaining Control<span class='dot'>...</span></div>",
+        6: "<div><span class='dot'>...</span></div>"
+      };
+
+      let i=0;
+      function insertLines(){
+        if(i<7){
+          let ran=(Math.random())*2000;
+          setTimeout(()=>{
+              document.getElementsByClassName("window")[0].innerHTML += object[i];
+            i++;
+            insertLines();
+          },ran)
+
+        }
+        else{
+
+          alert("System Hacked Successfully\n")
+
+          //Removing aniamtiobs at end
+            const dots = document.querySelectorAll(".dot");
+              dots.forEach(dot => {
+              dot.classList.remove("dot");
+            });
+
+            const blinks = document.querySelectorAll(".blink");
+              blinks.forEach(blinks => {
+              blinks.classList.remove("blink");
+
+                //Blank screen
+                // Inside the insertLines function, after setting the new innerHTML:
+                document.body.innerHTML = "<div id='hacked'> HaHaHa!!! You Are Hacked!!!</div>";
+
+                // Use setTimeout to delay the alert
+                setTimeout(() => {
+                    const alertScript = document.createElement("script");
+                    alertScript.textContent = 'alert("Just A Joke :)");';
+                    document.body.appendChild(alertScript);
+                }, 1000); // Delay of 3000 milliseconds (3 seconds)
+
+                // Add the class for styling
+                document.body.classList.add("hacked");
+
+            });
+        }
+
+
+      }
+
+      //iife async fx 
+      (async function main(){
+        await typePlaceholder();
+        await insertLines();
+      })()
+
+
+
+    },{once:true});
+
+  </script>
+
+
+</body>
+</html>
+
+
+
+<!--
+//Partially worked code (left to learn)
+/*document.addEventListener("touchstart",()=>{
+      alert("Hacking Initialised ")
+
+
+
+      document.getElementById("cmd").placeholder="/cmd:initialise"
+      let count=0;
+      let maxcount=10;
+      let ran=10000
+      const intervalId = setInterval(()=>{
+        let ran = (Math.random())*100000;
+        if(count<=maxcount){
+          document.getElementsByClassName("window")[0].innerHTML+="<div>Hacking...</div>"
+          count++;
+
+        }
+        else{
+          clearInterval(intervalId)
+        }
+
+      },ran)
+
+    },{once:true});
+    */
+    /*
+    let btn = document.getElementById("cmd")
+    btn.addEventListener("click",()=>{
+      document.getElementById("cmd").placeholder="/cmd:initialise"
+    })*/
+
+    //setInterval runs after fix time and the the time cannot be random so setTimeout function is used with loop structure suggested by gpt
+
+//•••••••••\\\\
+/*
+    document.addEventListener("touchstart",()=>{
+      alert("Hacking Initialised...")
+
+      document.getElementById("cmd").placeholder="/cmd:initialise"
+      const object = {
+        0:"<div>...</div>",
+        1:"<div>Hacking...</div>",
+        2:"<div>Getting Files...</div>"
+      }
+
+      for(let i=0;i<=2;i++){
+        let ran=(Math.random())*7000;
+        setTimeout(()=>{
+          console.log(i)
+          console.log(object[i])
+          document.getElementsByClassName("window")[0].innerHTML += object[i]
+        },ran)
+      }
+
+
+    },{once:true});
+*/
+    //Works well but due to asynchronous nature of js when setTimeout executes the loop doesn't wait for it to execute and i increase and hence value of i cannot be fixed.
+
+-->
+
