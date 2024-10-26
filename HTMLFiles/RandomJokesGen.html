@@ -1,0 +1,156 @@
+<!--Random Jokes Exercise-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackerRank-Random Jokes Generator</title>
+  <style>
+    /*CSS*/
+    :root {
+        --bg-color: #a47e3c; /* Default light mode background color */
+        --text-color: black; /* Default light mode text color */
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg-color: #a47e3c; /* Dark mode background color */
+            --text-color: white; /* Dark mode text color */
+        }
+    }
+
+    /* Apply the variables to your page */
+    body {
+        margin:0px;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+
+    /* Animation for the joke */
+    #joke {
+
+      transition: transform 0.2s ease-in-out; /* Smooth transition */
+    }
+
+    #joke, #heading {
+      position: relative; 
+      top:0px;
+      left:0px;
+      height:60vh;
+      width:100vw;
+      font-size:20px;
+      font-weight:bold;
+      text-align:center;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background-color: var(--bg-color);
+    }
+
+    #heading {
+      height:10vh;
+      background-color:black;
+      color:white;
+    }
+
+    #btndiv {
+      width:100vw;
+      height:50px;
+      position:relative;
+      top:25px;
+      display:flex;
+      justify-content:center;
+    }
+
+    #btn {
+      background-color:brown;
+      border:2px solid black;
+      border-radius:6px;
+      cursor: not-allowed; /* Indicate the button is disabled */
+    }
+
+    #btn.enabled {
+      cursor: pointer; /* Change cursor when enabled */
+    }
+
+    #btn:hover {
+      background-color:darkred;
+      outline:2px solid yellow;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="heading">
+    Random Jokes Generator
+  </div>
+  <div id="joke">
+
+  </div>
+  <div id="btndiv">
+    <button id="btn" disabled>Generate Joke</button> <!-- Initially disabled -->
+  </div>
+
+  <script>
+    let jokelist = [];
+
+    // Function to fetch joke and add to list
+    async function getJokes() {      
+      const response = await fetch("https://v2.jokeapi.dev/joke/Any"); // Fetch a random joke
+      const joke = await response.json();
+
+      // Check if the joke is a single joke or a two-part joke
+      if (joke.type === "single") {
+        jokelist.push({ joke: joke.joke }); // Push single joke
+      } else {
+        jokelist.push({ joke: `${joke.setup} ... ${joke.delivery}` }); // Push two-part joke
+      }
+    }
+
+    // Function to generate random joke
+    function printJokes(jokes) {
+      let btn = document.getElementById("btn");
+      btn.addEventListener("touchstart", () => {
+        displayJoke(jokes);
+      });
+
+      btn.addEventListener("click", () => {
+        displayJoke(jokes);
+      });
+    }
+
+    // Function to display joke and reset animation
+    function displayJoke(jokes) {
+      let r = Math.floor((Math.random()) * jokes.length);
+      let jokeDiv = document.getElementById("joke");
+      jokeDiv.innerHTML = jokes[r].joke;
+
+      // Reset animation
+      jokeDiv.style.transform = 'scaleX(0)'; // Immediately hide joke
+      setTimeout(() => {
+        jokeDiv.style.transform = 'scaleX(1)'; // Show it after a slight delay
+      }, 300); // Slight delay to trigger the animation again
+    }
+
+    // IIFE function 
+    (async function main() {
+      await getJokes();
+      printJokes(jokelist);
+
+      // Enable the button after the first joke is loaded
+      document.getElementById("btn").disabled = false; // Enable the button
+      document.getElementById("btn").classList.add("enabled"); // Add enabled class for cursor change
+
+      let i = 0;
+      while(i < 9) { // Fetch additional jokes
+        i++;
+        await getJokes();
+      }     
+    })()
+
+  </script>
+
+</body>
+</html>
