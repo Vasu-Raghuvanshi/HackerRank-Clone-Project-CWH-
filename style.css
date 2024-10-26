@@ -37,7 +37,9 @@ a{
 
 /* Body background color */
 body {
-  background-color: #000000; /* Set background color to black */
+  background-color: #000000;
+  margin:0px;
+  padding:0px;/* Set background color to black */
 }
 
 /* Navigation bar styling */
@@ -279,6 +281,7 @@ main * {
 }
 /* Footer Styling */
 footer {
+  box-sizing:border-box;
   position:relative;
   bottom:0px;
   border:2px solid transparent;
@@ -290,7 +293,7 @@ footer {
   align-items:center;
   flex-wrap:wrap;
   color: white; /* White text color */
-  margin: 20px 10px 10px 10px;
+  margin: 10px 0px 0px 0px;
 }
 
 #footBox{
@@ -306,7 +309,7 @@ footer {
 
 .contactfoot{
   display:block;
-  width:100%;
+  width:100vw;
   text-align:center;
 }
 
