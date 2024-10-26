@@ -1,6 +1,7 @@
 # HackerRank-Clone-Project
 •THIS IS A DEMO HACKERRANK CLONE PROJECT USING HTML,CSS,JS
-Special Thanks To #CodeWithHarry for the FreeOfCost  #SigmaWebDevelopementCourse With Premium Learnings.
+
+•Special Thanks To #CodeWithHarry for the FreeOfCost  #SigmaWebDevelopementCourse With Premium Learnings.
 
 🌟HOME PAGE:
 ![Screenshot_2024-10-26-10-47-31-699_pure lite browser](https://github.com/user-attachments/assets/a2bdbe4c-0615-418e-81d4-8cc98c1a0acb)
